@@ -1,28 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using graph.Edges;
+using Graphs;
 
 namespace Graph
 {
-    public abstract class Graph
+    internal class Program
     {
-        private int[,] adjacencyMatrix;
-        private List<List<int>> adjacencyList;
-
-        public Graph(int vertices)
+        public static void Main(string[] args)
         {
-            adjacencyMatrix = new int[vertices, vertices];
-            adjacencyList = new List<List<int>>();
-            for (int i = 0; i < vertices; i++)
-            {
-                adjacencyList.Add(new List<int>());
-            }
+            UnweightedGraph graph = new UnweightedGraph(5);
+            WeightedGraph graph1 = new WeightedGraph(5);
+            graph1.AddEdge(1, 2, 3);
+            graph.AddEdge(1, 2);
+            graph1.PrintAdjacencyList();
         }
-
-        public abstract void AddEdge(int startVertex, int endVertex);
-        public abstract void RemoveEdge(int startVertex, int endVertex);
-
-        public abstract void AddVertex();
-        public abstract void RemoveVertex();
-
     }
 }

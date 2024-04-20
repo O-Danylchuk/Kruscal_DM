@@ -1,27 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using graph.BasicGraphs;
 
-namespace graph.BasicGraph
+
+namespace Graphs
 {
-    internal class UnweightedGraph
+    internal class UnweightedGraph : BaseGraph<int>
     {
-        private int[,] adjacencyMatrix;
-        private List<List<int>> adjacencyList;
-
-        public UnweightedGraph(int vertices)
+        public UnweightedGraph(int vertices) : base(vertices)
         {
-            adjacencyMatrix = new int[vertices, vertices];
-            adjacencyList = new List<List<int>>();
-            for (int i = 0; i < vertices; i++)
-            {
-                adjacencyList.Add(new List<int>());
-            }
         }
 
-        public void AddEdge(int startVertex, int endVertex)
+        public override void AddEdge(int startVertex, int endVertex, int weight = 1)
         {
             adjacencyList[startVertex].Add(endVertex);
             adjacencyList[endVertex].Add(startVertex);
@@ -29,7 +19,7 @@ namespace graph.BasicGraph
             adjacencyMatrix[startVertex, endVertex] = 1;
             adjacencyMatrix[endVertex, startVertex] = 1;
         }
-        public void RemoveEdge(int startVertex, int endVertex)
+        public override void RemoveEdge(int startVertex, int endVertex)
         {
             adjacencyList[startVertex].Remove(endVertex);
             adjacencyList[endVertex].Remove(startVertex);
@@ -38,41 +28,45 @@ namespace graph.BasicGraph
             adjacencyMatrix[endVertex, startVertex] = 0;
         }
 
-        public void AddVertex()
+        public override void AddVertex()
         {
             int vertices = adjacencyMatrix.GetLength(0) + 1;
             int[,] newMatrix = new int[vertices, vertices];
+
             Array.Copy(adjacencyMatrix, newMatrix, adjacencyMatrix.Length);
             adjacencyMatrix = newMatrix;
 
             adjacencyList.Add(new List<int>());
         }
-        public void RemoveVertex(int vertex)
+        public override void RemoveVertex(int vertex)
         {
             int vertices = adjacencyMatrix.GetLength(0) - 1;
             int[,] newMatrix = new int[vertices, vertices];
 
-            int row = 0, col = 0;
+            int newRow = 0, newCol = 0;
             for (int i = 0; i < adjacencyMatrix.GetLength(0); i++)
             {
                 if (i != vertex)
                 {
+                    newCol = 0;
                     for (int j = 0; j < adjacencyMatrix.GetLength(1); j++)
                     {
                         if (j != vertex)
                         {
-                            newMatrix[row, col] = adjacencyMatrix[i, j];
-                            col++;
+                            newMatrix[newRow, newCol] = adjacencyMatrix[i, j];
+                            newCol++;
                         }
                     }
+                    newRow++;
                 }
             }
+
             adjacencyMatrix = newMatrix;
 
             adjacencyList.RemoveAt(vertex);
             foreach (List<int> list in adjacencyList)
             {
-                list.Remove(vertex);
+                list.RemoveAll(adjacentVertex => adjacentVertex == vertex);
             }
         }
     }
