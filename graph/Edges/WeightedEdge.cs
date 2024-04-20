@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace graph.BasicGraph
+namespace graph.Edges
 {
-    internal class graph
+    internal class WeightedEdge
     {
     }
 }
