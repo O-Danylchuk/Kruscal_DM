@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using graph.Edges;
-using graph.BasicGraphs;
+using graph.BasicGraph;
 
 namespace Graphs
 {
@@ -12,7 +12,7 @@ namespace Graphs
         {
         }
 
-        public override void AddEdge(int startVertex, int endVertex, int weight = 1)
+        public override void AddEdge(int startVertex, int endVertex, int weight)
         {
             adjacencyList[startVertex].Add(new WeightedEdge(endVertex, weight));
             adjacencyList[endVertex].Add(new WeightedEdge(startVertex, weight));
@@ -41,36 +41,17 @@ namespace Graphs
             adjacencyList.Add(new List<WeightedEdge>());
         }
 
-        public override void RemoveVertex(int vertex)
+        public void PrintAdjacencyList()
         {
-            int vertices = adjacencyMatrix.GetLength(0) - 1;
-            int[,] newMatrix = new int[vertices, vertices];
-
-            int newRow = 0, newCol = 0;
-            for (int i = 0; i < adjacencyMatrix.GetLength(0); i++)
+            Console.WriteLine("Adjacency List:");
+            for (int i = 0; i < adjacencyList.Count; i++)
             {
-                if (i != vertex)
+                Console.Write($"{i}: ");
+                foreach (var item in adjacencyList[i])
                 {
-                    newCol = 0; // Reset column for each row
-                    for (int j = 0; j < adjacencyMatrix.GetLength(1); j++)
-                    {
-                        if (j != vertex)
-                        {
-                            newMatrix[newRow, newCol] = adjacencyMatrix[i, j];
-                            newCol++;
-                        }
-                    }
-                    newRow++; // Move to the next row in the new matrix
+                    Console.Write($"(Vertex: {item.Vertex}, Weight: {item.Weight}) ");
                 }
-            }
-
-            adjacencyMatrix = newMatrix;
-
-            // Remove the vertex from adjacencyList and remove all incident edges
-            adjacencyList.RemoveAt(vertex);
-            foreach (List<WeightedEdge> list in adjacencyList)
-            {
-                list.RemoveAll(edge => edge.Vertex == vertex);
+                Console.WriteLine();
             }
         }
     }

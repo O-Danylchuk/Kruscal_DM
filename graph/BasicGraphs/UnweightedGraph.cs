@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using graph.BasicGraphs;
+using graph.BasicGraph;
 
 
 namespace Graphs
@@ -38,35 +38,18 @@ namespace Graphs
 
             adjacencyList.Add(new List<int>());
         }
-        public override void RemoveVertex(int vertex)
+
+        public void PrintAdjacencyList()
         {
-            int vertices = adjacencyMatrix.GetLength(0) - 1;
-            int[,] newMatrix = new int[vertices, vertices];
-
-            int newRow = 0, newCol = 0;
-            for (int i = 0; i < adjacencyMatrix.GetLength(0); i++)
+            Console.WriteLine("Adjacency List:");
+            for (int i = 0; i < adjacencyList.Count; i++)
             {
-                if (i != vertex)
+                Console.Write($"{i}: ");
+                foreach (var item in adjacencyList[i])
                 {
-                    newCol = 0;
-                    for (int j = 0; j < adjacencyMatrix.GetLength(1); j++)
-                    {
-                        if (j != vertex)
-                        {
-                            newMatrix[newRow, newCol] = adjacencyMatrix[i, j];
-                            newCol++;
-                        }
-                    }
-                    newRow++;
+                    Console.Write($"{item}");
                 }
-            }
-
-            adjacencyMatrix = newMatrix;
-
-            adjacencyList.RemoveAt(vertex);
-            foreach (List<int> list in adjacencyList)
-            {
-                list.RemoveAll(adjacentVertex => adjacentVertex == vertex);
+                Console.WriteLine();
             }
         }
     }
