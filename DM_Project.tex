@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{geometry} % Adjust page margins if needed
+\usepackage{booktabs} % For better horizontal rules in tables
+\usepackage[font=normalsize,labelformat=empty]{caption}
+\usepackage{graphicx} % For including images
+\usepackage{hyperref} % For hyperlinks
+
+\begin{document}
+
+\title{Project Report: Kruskal's Algorithm Analysis}
+\author{Oleksandr Danylchuk, Podkolzin Bohdan}
+\date{\today}
+\maketitle
+
+\section{Algorithm Description}
+\subsection{Problem Statement}
+Kruskal's algorithm is used to find the minimum spanning tree of a connected, undirected graph.
+
+\subsection{Input and Output}
+The input to Kruskal's algorithm is a weighted graph. The output is the minimum spanning tree of the input graph.
+
+\subsection{Pseudocode}
+\begin{verbatim}
+Kruskal(G):
+    1. Initialize an empty set S to store the minimum spanning tree.
+    2. Sort the edges of G in non-decreasing order of their weights.
+    3. For each edge e in sorted order:
+        a. If adding e to S does not create a cycle, add e to S.
+    4. Return S.
+\end{verbatim}
+
+\subsection{Complexity Analysis}
+The time complexity of Kruskal's algorithm is \(O(E \log V)\), where \(V\) is the number of vertices and \(E\) is the number of edges in the graph.
+
+\section{Implementation Details}
+We implemented Kruskal's algorithm in C\# and it works on weighted undirected graphs.
+
+\section{GitHub Repository}
+The source code for our implementation can be found in our GitHub repository: \\
+\url{https://github.com/O-Danylchuk/Kruscal_DM}
+
+\section{Experimental Section}
+We conducted experiments to analyze the performance of Kruskal's algorithm using graphs of different sizes and densities. Each experiment was repeated 1000 times to ensure statistical significance.
+
+\subsection{Experimental Setup}
+We varied the size of the graphs from 20 to 200 vertices and the density from 0.5 to 1.
+
+\subsection{Results}
+The results of our experiments are summarized in Table \ref{tab:performance}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Analysis of Kruskal's Algorithm Performance (Based on 1000 executions for each size and density)}
+    \label{tab:performance}
+    \begin{tabular}{cccc}
+        \toprule
+        \textbf{Graph Size} & \textbf{Density} & \textbf{AVG Time Span (s)} & \textbf{Total Timespan} \\
+        \midrule
+        20 & 0.5 & 00:00:00.0000245 & Total Timespan: 00:00:00.0245049 \\
+        20 & 0.6 & 00:00:00.0000228 & Total Timespan: 00:00:00.0228360 \\
+        20 & 0.7 & 00:00:00.0000252 & Total Timespan: 00:00:00.0252624 \\
+        20 & 0.8 & 00:00:00.0000270 & Total Timespan: 00:00:00.0270041 \\
+        20 & 0.9 & 00:00:00.0000285 & Total Timespan: 00:00:00.0285637 \\
+        20 & 1 & 00:00:00.0000310 & Total Timespan: 00:00:00.0310719 \\
+        \midrule
+        50 & 0.5 & 00:00:00.0001120 & Total Timespan: 00:00:00.1120714 \\
+        50 & 0.6 & 00:00:00.0001468 & Total Timespan: 00:00:00.1468411 \\
+        50 & 0.7 & 00:00:00.0001286 & Total Timespan: 00:00:00.1286144 \\
+        50 & 0.8 & 00:00:00.0001489 & Total Timespan: 00:00:00.1489326 \\
+        50 & 0.9 & 00:00:00.0001711 & Total Timespan: 00:00:00.1711727 \\
+        50 & 1 & 00:00:00.0001819 & Total Timespan: 00:00:00.1819982 \\
+        \midrule
+        100 & 0.5 & 00:00:00.0004095 & Total Timespan: 00:00:00.4095768 \\
+        100 & 0.6 & 00:00:00.0005113 & Total Timespan: 00:00:00.5113864 \\
+        100 & 0.7 & 00:00:00.0005764 & Total Timespan: 00:00:00.5764385 \\
+        100 & 0.8 & 00:00:00.0006467 & Total Timespan: 00:00:00.6467366 \\
+        100 & 0.9 & 00:00:00.0007414 & Total Timespan: 00:00:00.7414309 \\
+        100 & 1 & 00:00:00.0008218 & Total Timespan: 00:00:00.8218725 \\
+        \midrule
+        150 & 0.5 & 00:00:00.0009792 & Total Timespan: 00:00:00.9792055 \\
+        150 & 0.6 & 00:00:00.0011684 & Total Timespan: 00:00:01.1684763 \\
+        150 & 0.7 & 00:00:00.0013208 & Total Timespan: 00:00:01.3208278 \\
+        150 & 0.8 & 00:00:00.0020428 & Total Timespan: 00:00:02.0428732 \\
+        150 & 0.9 & 00:00:00.0022511 & Total Timespan: 00:00:02.2511497 \\
+        150 & 1 & 00:00:00.0021746 & Total Timespan: 00:00:02.1746300 \\
+        \midrule
+        200 & 0.5 & 00:00:00.0022965 & Total Timespan: 00:00:02.2965757 \\
+        200 & 0.6 & 00:00:00.0022137 & Total Timespan: 00:00:02.2137217 \\
+        200 & 0.7 & 00:00:00.0031230 & Total Timespan: 00:00:03.1230039 \\
+        200 & 0.8 & 00:00:00.0048655 & Total Timespan: 00:00:04.8655094 \\
+        200 & 0.9 & 00:00:00.0052040 & Total Timespan: 00:00:05.2040051 \\
+        200 & 1 & 00:00:00.0054285 & Total Timespan: 00:00:05.4285494 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Analysis}
+From the results, we observe that as the size and density of the graph increase, the execution time of Kruskal's algorithm also increases. This behavior is consistent with the theoretical time complexity of the algorithm.
+
+\section{Contribution}
+Oleksandr Danylchuk and Bohdan Podkolzin contributed equally to this project.
+
+\section{Conclusions}
+In conclusion, our analysis demonstrates the effectiveness of Kruskal's algorithm in finding minimum spanning trees. The algorithm's performance scales well with the size and density of the input graph, as evidenced by our experimental results.
+
+\end{document}
