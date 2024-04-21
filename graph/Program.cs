@@ -1,6 +1,7 @@
 ﻿using ER_graphs;
 using System.Diagnostics;
 
+
 namespace GraphExperiment
 {
     class Program
