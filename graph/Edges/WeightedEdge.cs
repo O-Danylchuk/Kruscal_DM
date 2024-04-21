@@ -4,17 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace graph.Edges
+namespace Edges
 {
-    internal class WeightedEdge
+    internal class WeightedEdge : IComparable<WeightedEdge>
     {
-        public int Vertex { get; }
+        public int StartVertex { get; }
+        public int EndVertex { get; }
         public int Weight { get; }
 
-        public WeightedEdge(int vertex, int weight)
+        public WeightedEdge(int startVertex, int endVertex, int weight)
         {
-            Vertex = vertex;
+            StartVertex = startVertex;
+            EndVertex = endVertex;
             Weight = weight;
+        }
+
+        // compares edges by weight
+        public int CompareTo(WeightedEdge other)
+        {
+            return this.Weight - other.Weight;
+        }
+        public override string ToString()
+        {
+            return $"(({StartVertex}, {EndVertex}), Weight: {Weight})";
         }
     }
 }

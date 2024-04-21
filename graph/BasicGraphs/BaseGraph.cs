@@ -10,7 +10,6 @@ namespace graph.BasicGraph
     {
         protected int[,] adjacencyMatrix;
         protected List<List<T>> adjacencyList;
-        public int Size => adjacencyMatrix.GetLength(0);
 
         protected BaseGraph(int vertices)
         {

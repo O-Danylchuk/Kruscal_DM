@@ -1,5 +1,5 @@
 ﻿using Graphs;
-using graph.Edges;
+using Edges;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +14,14 @@ namespace ER_graphs
         const int MINWEIGHT = 1;
         const int MAXWEIGHT = 11;
 
-        public int Vertices => adjacencyMatrix.GetLength(0);
         public WeightedER(int vertices) : base(vertices)
         {
         }
 
         public static WeightedER GenerateWeightedERGraph(double edgeProbability, int size)
         {
-            WeightedER wer = new WeightedER(size);
             Random randomInstance = new Random();
+            WeightedER wer = new WeightedER(size);
 
             if (edgeProbability < 0 || edgeProbability > 1)
             {

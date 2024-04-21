@@ -9,8 +9,6 @@ namespace ER_graphs
 {
     internal class UnweightedER : UnweightedGraph
     {
-        Random random = new Random();
-        public int Vertices => adjacencyMatrix.GetLength(0);
         public UnweightedER(int vertices) : base(vertices)
         {
         }
