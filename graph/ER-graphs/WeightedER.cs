@@ -33,7 +33,7 @@ namespace ER_graphs
                 for (int j = i + 1; j < size; j++)
                 {
                     double random = randomInstance.NextDouble();
-                    if (random <= edgeProbability)
+                    if (random < edgeProbability)
                     {
                         int weight = randomInstance.Next(MINWEIGHT, MAXWEIGHT);
                         wer.AddEdge(i, j, weight);

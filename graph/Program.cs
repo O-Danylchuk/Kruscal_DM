@@ -4,29 +4,48 @@ using System.Threading.Channels;
 using Edges;
 using Graphs;
 using ER_graphs;
+using System.Diagnostics;
 
-namespace Graph
+namespace GraphExperiment
 {
-    internal class Program
+    class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            WeightedGraph graph1 = new WeightedGraph(5);
-            graph1.AddEdge(1, 2, 1);
-            graph1.AddEdge(3, 4, 2);
-            graph1.AddEdge(2, 3, 1);
+            // Розміри графів для експерименту (від 20 до 200 вершин)
+            int[] graphSizes = { 20, 50, 100, 150, 200 };
 
-            WeightedER randomW = WeightedER.GenerateWeightedERGraph(0.3, 5);
-            graph1.PrintAdjacencyList();
-            graph1.PrintAdjacencyMatrix();
+            // Щільність графу (кількість ребер у відсотках)
+            double[] densities = { 0.5, 0.6, 0.7, 0.8, 0.9, 1 };
 
-            //UnweightedER randomU = UnweightedER.GenerateUnweightedERGraph(0.3, 5);
-            //randomU.PrintAdjacencyList();
-            //randomU.PrintAdjacencyMatrix();
+            foreach (int size in graphSizes)
+            {
+                foreach (double density in densities)
+                {
+                    // Кількість експериментів для кожної пари "розмір, щільність"
+                    int experimentsCount = 1000;
 
-            WeightedGraph wr = graph1.Kruskal();
-            wr.PrintAdjacencyMatrix();
-            wr.PrintAdjacencyList();
+                    // Total 
+                    TimeSpan totalExecutionTime = TimeSpan.Zero;
+
+                    for (int i = 0; i < experimentsCount; i++)
+                    {
+                        // Генеруємо граф з вказаним розміром та щільністю
+                        WeightedER graph = WeightedER.GenerateWeightedERGraph(density, size);
+
+                        // Вимірюємо час виконання алгоритму Крускала
+                        Stopwatch stopwatch = new Stopwatch();
+                        stopwatch.Start();
+                        WeightedGraph MST = graph.Kruskal();
+                        stopwatch.Stop();
+                        totalExecutionTime += stopwatch.Elapsed;
+                    }
+
+                    TimeSpan averageExecutionTime = TimeSpan.FromTicks(totalExecutionTime.Ticks / experimentsCount);
+
+                    Console.WriteLine($"Graph size: {size}, Density: {density}, AVG timespan: {averageExecutionTime}, total timespan: {totalExecutionTime}");
+                }
+            }
         }
     }
 }
