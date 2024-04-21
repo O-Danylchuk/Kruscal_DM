@@ -12,31 +12,29 @@ namespace GraphExperiment
     {
         static void Main(string[] args)
         {
-            // Розміри графів для експерименту (від 20 до 200 вершин)
-            int[] graphSizes = { 20, 50, 100, 150, 200 };
+            int[] graphSizes = [20, 50, 100, 150, 200];
 
-            // Щільність графу (кількість ребер у відсотках)
-            double[] densities = { 0.5, 0.6, 0.7, 0.8, 0.9, 1 };
+            double[] densities = [0.5, 0.6, 0.7, 0.8, 0.9, 1];
 
             foreach (int size in graphSizes)
             {
                 foreach (double density in densities)
                 {
-                    // Кількість експериментів для кожної пари "розмір, щільність"
+                    // change it if your system runs code for a long time
                     int experimentsCount = 1000;
 
-                    // Total 
+                    // Total time for group of graphs
                     TimeSpan totalExecutionTime = TimeSpan.Zero;
 
                     for (int i = 0; i < experimentsCount; i++)
                     {
-                        // Генеруємо граф з вказаним розміром та щільністю
+                        // Generate Graph
                         WeightedER graph = WeightedER.GenerateWeightedERGraph(density, size);
 
-                        // Вимірюємо час виконання алгоритму Крускала
-                        Stopwatch stopwatch = new Stopwatch();
+                        // Get execution time of Kruskal alghoritm
+                        Stopwatch stopwatch = new();
                         stopwatch.Start();
-                        WeightedGraph MST = graph.Kruskal();
+                        graph.Kruskal();
                         stopwatch.Stop();
                         totalExecutionTime += stopwatch.Elapsed;
                     }
