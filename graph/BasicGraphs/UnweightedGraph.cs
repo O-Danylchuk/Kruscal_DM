@@ -47,7 +47,7 @@ namespace Graphs
                 Console.Write($"{i}: ");
                 foreach (var item in adjacencyList[i])
                 {
-                    Console.Write($"{item}");
+                    Console.Write($"{item}, ");
                 }
                 Console.WriteLine();
             }
